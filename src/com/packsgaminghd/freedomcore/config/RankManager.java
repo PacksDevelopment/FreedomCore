@@ -1,14 +1,15 @@
-package server.AvalancheYT.FreedomCore;
+package com.packsgaminghd.freedomcore.config;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import server.AvalancheYT.FreedomCore.Config.ConfigManager;
+import com.packsgaminghd.freedomcore.config.ConfigManager;
+import static com.packsgaminghd.freedomcore.config.RankManager.Rank.*;
 
 public class RankManager {
     
     public enum Rank {
-        OP("Op", ChatColor.RED + "[OP]"), SA("Super Admin", ChatColor.GOLD + "[SA]"), STA("Super Telnet Admin", ChatColor.DARK_GREEN + "[STA]"), SRA("Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"), CONSOLE("Console", ChatColor.DARK_AQUA + "[Console]");
+        NON("Non-Op", ChatColor.YELLOW + ""), OP("Op", ChatColor.RED + "[OP]"), SA("Super Admin", ChatColor.GOLD + "[SA]"), STA("Super Telnet Admin", ChatColor.DARK_GREEN + "[STA]"), SRA("Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"), OWNER("Owner", ChatColor.BLUE + "[Owner]"), CONSOLE("Console", ChatColor.DARK_AQUA + "[Console]");
         
         private final String name;
         private final String prefix;
@@ -34,17 +35,21 @@ public class RankManager {
     
     public static boolean isSuperAdmin(CommandSender sender) {
         Player player = (Player) sender;
-        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("super admin");
+        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("super");
     }
     
     public static boolean isTelnetAdmin(CommandSender sender) {
         Player player = (Player) sender;
-        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("telnet admin");
+        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("telnet");
     }
     
     public static boolean isSeniorAdmin(CommandSender sender) {
         Player player = (Player) sender;
-        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("senior admin");
+        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("senior");
+    } 
+    public static boolean isOwner(CommandSender sender) {
+        Player player = (Player) sender;
+        return ConfigManager.getAdmin().getConfig().getString(player.getUniqueId().toString() + ".admin").equalsIgnoreCase("owner");
     } 
     
     public static Rank getRank(CommandSender sender) {
@@ -55,20 +60,24 @@ public class RankManager {
         final Player player = (Player) sender;
         
         if (isSuperAdmin(player)) {
-            return Rank.SA;
+            return SA;
         }
         
         if (isTelnetAdmin(player)) {
-            return Rank.STA;
+            return STA;
         }
         
         if (isSeniorAdmin(player)) {
-            return Rank.SRA;
+            return SRA;
         }
-        if (sender.getName().equals("TaahThePhoenix"))
-        {
-            return Rank.SRA;
+        if (isOwner(player)) {
+            return OWNER;
         }
-        return Rank.OP;
+        if (player.isOp()) {
+            return OP;
+        } else {
+            return NON;
+        }
+
     }
 }

@@ -1,11 +1,11 @@
-package server.AvalancheYT.FreedomCore.Commands;
+package com.packsgaminghd.freedomcore.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import server.AvalancheYT.FreedomCore.Config.ConfigManager;
-import server.AvalancheYT.FreedomCore.FreedomCore;
+import com.packsgaminghd.freedomcore.config.ConfigManager;
+import com.packsgaminghd.freedomcore.FreedomCore;
 
 public class Command_fc implements CommandExecutor {
     

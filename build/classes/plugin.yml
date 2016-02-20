@@ -1,8 +1,8 @@
 name: FreedomCore
 version: 1.0
 description: A new custom mod for ChickenFreedom
-authors: [AvalancheYT, TaahThePhoenix]
-main: server.AvalancheYT.FreedomCore.FreedomCore
+authors: [TaahThePhoenix, Adaptafied, PacksGamingHD]
+main: com.packsgaminghd.freedomcore.FreedomCore
 commands:
     fc:
         description: shows information about FreedomCore

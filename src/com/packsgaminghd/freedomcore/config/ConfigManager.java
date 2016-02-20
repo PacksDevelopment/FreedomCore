@@ -1,6 +1,6 @@
-package server.AvalancheYT.FreedomCore.Config;
+package com.packsgaminghd.freedomcore.config;
 
-import server.AvalancheYT.FreedomCore.FreedomCore;
+import com.packsgaminghd.freedomcore.FreedomCore;
 
 public class ConfigManager {
     

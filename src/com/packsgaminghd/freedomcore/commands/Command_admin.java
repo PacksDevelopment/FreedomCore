@@ -1,4 +1,4 @@
-package server.AvalancheYT.FreedomCore.Commands;
+package com.packsgaminghd.freedomcore.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,8 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import server.AvalancheYT.FreedomCore.Config.ConfigManager;
-import server.AvalancheYT.FreedomCore.FreedomCore;
+import com.packsgaminghd.freedomcore.config.ConfigManager;
+import com.packsgaminghd.freedomcore.FreedomCore;
+import static com.packsgaminghd.freedomcore.config.RankManager.isSeniorAdmin;
+import static com.packsgaminghd.freedomcore.config.RankManager.isTelnetAdmin;
 
 public class Command_admin implements CommandExecutor {
     
@@ -19,6 +21,9 @@ public class Command_admin implements CommandExecutor {
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        Player player = Bukkit.getPlayer(args[1]);
+        if (isTelnetAdmin(player) || isSeniorAdmin(player))
+        {
         if (args.length == 1) {
             if (!args[0].equalsIgnoreCase("list")) {
                 return false;
@@ -28,7 +33,7 @@ public class Command_admin implements CommandExecutor {
         }
         
         if (args.length == 2) {
-            Player player = Bukkit.getPlayer(args[1]);
+
             if (player == null) {
                 sender.sendMessage(ChatColor.RED + "Player: " + args[1] + " is invalid");
                 return true;
@@ -37,7 +42,7 @@ public class Command_admin implements CommandExecutor {
                 Bukkit.broadcastMessage(ChatColor.GREEN + sender.getName() + " - Adding " + player.getName() + " to superadmin list");
                 ConfigManager.getAdmin().getConfig().set(player.getUniqueId().toString() + ".name", player.getName());
                 ConfigManager.getAdmin().getConfig().set(player.getUniqueId().toString() + ".ip", player.getAddress().getHostString());
-                ConfigManager.getAdmin().getConfig().set(player.getUniqueId().toString() + ".admin", "super admin");
+                ConfigManager.getAdmin().getConfig().set(player.getUniqueId().toString() + ".admin", "super");
                 ConfigManager.getAdmin().getConfig().set(player.getUniqueId().toString() + ".tag", "");
                 ConfigManager.getAdmin().saveConfig();
                 return true;
@@ -52,5 +57,9 @@ public class Command_admin implements CommandExecutor {
             return false;
         }
         return false;
+        } else {
+            sender.sendMessage(ChatColor.RED + "You do not have permission to use /admin");
+        }
+        return true;
     }
 }

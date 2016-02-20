@@ -1,4 +1,4 @@
-package server.AvalancheYT.FreedomCore.Listeners;
+package com.packsgaminghd.freedomcore.listeners;
 
 import net.minecraft.server.v1_8_R3.ServerPing;
 import org.bukkit.Bukkit;
@@ -7,11 +7,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
-import server.AvalancheYT.FreedomCore.FreedomCore;
+import com.packsgaminghd.freedomcore.FreedomCore;
 
 public class ServerListener implements Listener {
     public ServerListener(FreedomCore plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    public ServerListener() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)

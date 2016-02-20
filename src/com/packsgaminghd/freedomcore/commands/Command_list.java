@@ -1,4 +1,4 @@
-package server.AvalancheYT.FreedomCore.Commands;
+package com.packsgaminghd.freedomcore.commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import server.AvalancheYT.FreedomCore.FreedomCore;
-import server.AvalancheYT.FreedomCore.RankManager;
+import com.packsgaminghd.freedomcore.FreedomCore;
+import com.packsgaminghd.freedomcore.config.RankManager;
 
 public class Command_list implements CommandExecutor {
     
@@ -39,13 +39,13 @@ public class Command_list implements CommandExecutor {
             }
         } else {
             filter = Filter.ALL;
-       final List<String> names = new ArrayList<>();
+        }
+        
+        final List<String> names = new ArrayList<>();
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (filter == Filter.ADMIN && !RankManager.isAdmin(player)) {
                 continue;
-             }
-        
-        
+            }
             
             names.add(RankManager.getRank(player).getPrefix() + player.getName());
         }
@@ -55,7 +55,4 @@ public class Command_list implements CommandExecutor {
         sender.sendMessage(org.apache.commons.lang3.StringUtils.join(names, ChatColor.WHITE, ", "));
         return true;
     }
-        return true;
-    }
 }
-

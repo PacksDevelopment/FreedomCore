@@ -1,4 +1,4 @@
-package server.AvalancheYT.FreedomCore.Config;
+package com.packsgaminghd.freedomcore.config;
 
 import java.io.File;
 import java.io.IOException;
